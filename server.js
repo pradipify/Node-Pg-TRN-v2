@@ -15,9 +15,24 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const connectDB = require('./config/db');
+const mongoose = require('mongoose');
+const passport = require('passport');
 
 // MongoDB connecting methed is here
-connectDB();
+// connectDB();
+// Passport Config
+require('./config/passport')(passport);
+
+const db = require('./config/keys').mongoURI;
+
+// Connecting to MongoDB Database to atlas
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true ,useUnifiedTopology: true}
+  )
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
 // @Route : request & response from the client side 
 app.get('/',(req, res) => res.send('API Running...'));

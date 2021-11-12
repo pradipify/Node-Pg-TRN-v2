@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const passport = require('passport');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 // Login @route
 app.post('/login', 
