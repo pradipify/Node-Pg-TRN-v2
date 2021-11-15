@@ -6,12 +6,11 @@ const passport = require('passport');
 const router = express.Router()
 
 // Register @route
-router.post('/registration', 
-    passport.authenticate('local'),
-    function(req, res){
+router.post('/',(req, res)=>{
+    const{firstName, lastName,username, email, password, confrimPassword}= req.body;
+    console.log(req.body);
+    res.send(req.body);
 
-        res.redirect('/users/'+req.user.username);
-    }
-)
+});
 module.exports = router;
 
