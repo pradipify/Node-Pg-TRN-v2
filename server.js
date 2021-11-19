@@ -11,19 +11,25 @@
                                                               */
 // Basic server configuration using expressjs liabraries
 // Importing the dependencies module from node_module directory
+// @Route : request & response from the client side 
 
 const express = require('express');
-const app = express();
-const router = express.Router();
 const connectDB = require('./config/db');
-const mongoose = require('mongoose');
-const passport = require('passport');
+const path =require('path');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const app = express();
 
+// MongoDB connection method here
 connectDB();
 
-// @Route : request & response from the client side 
-app.get('/',(req, res) => res.send('API Running...'));
+// Middleware || Body-Parser use
+app.use(express.json({exetended:false}));
 
+// Importing the APIs here for use
+app.use('/user/register', require('./routes/user/register'));
+app.use('/user/login', require('./routes/user/login'));
+//app.use('/user/login2', require('./routes/user/login2'));
 
 // Define environment Port for localhost that run local machine : client-server
 const PORT = process.env.PORT || 5000;
